@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Zoo {
 	
-	HashMap<String, ArrayList<Zone>> zooChart;
+	HashMap<String, ArrayList<Zone>> zooChart = new HashMap<String, ArrayList<Zone>>();
 	
 	static final int noOfZones = 15;
 	static  int numberOfZonesCreated = 0;
@@ -75,7 +75,7 @@ public class Zoo {
 	public Zone getZone(String type){
 		ArrayList<Zone> zones = zooChart.get(type);
 		Zone zone = null;
-		if(zones.size() == 0){
+		if(zones != null){
 			zone = new Zone(type);
 			zones.add(zone);
 		}else{

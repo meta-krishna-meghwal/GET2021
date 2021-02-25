@@ -10,21 +10,19 @@ public class JobScheduler {
 		this.length = processes.length;
 	}
 	
-	/**Method to calculate comppletion time  
+	/**Method to calculate completion time  
 	 * @return int[] */
 	public int[] completionTime(){
 		int [] completion = new int[this.length];
 		
-		int lastExecutedTime=0; 
+		int lastExecutedTime = 0; 
 		for(int i=0;i<this.length;i++){
-			
-			if(this.processes[i][0] > lastExecutedTime)
-			{
+			if(this.processes[i][0] > lastExecutedTime){
 				lastExecutedTime = this.processes[i][0];
-				
 			}
-			completion[i]=this.processes[i][1]+lastExecutedTime;
-			lastExecutedTime+=this.processes[i][1];
+			
+			completion[i] = this.processes[i][1] + lastExecutedTime;
+			lastExecutedTime += this.processes[i][1];
 		}
 		
 		return completion;
@@ -34,7 +32,7 @@ public class JobScheduler {
 	 * @return int[] */
 	public int[] turnAroundTime()
 	{
-		int tatResult[]= new int[this.length];
+		int answer[]= new int[this.length];
 		int lastExecutedTime=0;
 		int completionTime;
 		
@@ -47,11 +45,11 @@ public class JobScheduler {
 			}
 			completionTime=this.processes[i][1]+lastExecutedTime;
 			lastExecutedTime+=this.processes[i][1];
-			tatResult[i]=completionTime-this.processes[i][0];
+			answer[i]=completionTime-this.processes[i][0];
 			
 		}
 		
-		return tatResult;
+		return answer;
 		
 	}
 	
@@ -59,7 +57,7 @@ public class JobScheduler {
 	 * @return int[] */
 	public int[] waitingTime()
 	{
-		int waitingTimeResult[]=new int[this.length];
+		int answer[]=new int[this.length];
 		int lastExecutedTime=0;
 		int TurnAroundTime;
 		int completionTime;
@@ -73,11 +71,11 @@ public class JobScheduler {
 			completionTime=this.processes[i][1]+lastExecutedTime;
 			lastExecutedTime+=this.processes[i][1];
 			TurnAroundTime=completionTime-this.processes[i][0];
-			waitingTimeResult[i]=TurnAroundTime-this.processes[i][1];
+			answer[i]=TurnAroundTime-this.processes[i][1];
 			
 		}
 		
-		return waitingTimeResult;
+		return answer;
 		
 	}
 	
@@ -85,17 +83,17 @@ public class JobScheduler {
 	 * @return int[] */
 	public int averageWaitingTime()
 	{
-		int avgwait;
-		int totalwait=0;
+		int avgWait;
+		int totalWait=0;
 		int waitArray[]= this.waitingTime();
 		for(int x:waitArray)
 		{
-			totalwait+=x;
+			totalWait+=x;
 		}
 		
-		avgwait=totalwait/this.length;
+		avgWait=totalWait/this.length;
 		
-		return avgwait;	
+		return avgWait;	
 	}
 	
 	/**Method to calculate maximum waiting time
