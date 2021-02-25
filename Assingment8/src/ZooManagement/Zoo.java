@@ -6,8 +6,24 @@ import java.util.HashMap;
 public class Zoo {
 	
 	HashMap<String, ArrayList<Zone>> zooChart;
+	
 	static final int noOfZones = 15;
 	static  int numberOfZonesCreated = 0;
+	
+	
+	/** Initialization of zooChart for each category 
+	 * @param String[]  */
+	public Zoo(String[] types){
+		for(String s: types){
+			ArrayList<Zone> zones = new ArrayList<Zone>();
+			zooChart.put(s, zones);
+		}
+			
+	}
+	
+	/** Method for adding an animal to the zoo
+	 * @param Animal
+	 * @return boolean*/
 	
 	public boolean addAnimal(Animal animal){
 		
@@ -15,31 +31,32 @@ public class Zoo {
 		Zone zone = getZone(type);
 		Cage cage = null;
 		
-		if(numberOfZonesCreated == noOfZones && zone.isFull() ){
+		if(numberOfZonesCreated == noOfZones && zone.isZoneFull()){
 			return false;
-		}else if(numberOfZonesCreated < noOfZones){
-			if(zone.isFull()){
+		}
+		else{
+			if(zone.isZoneFull()){
 				zone = addZone(type);
 			}	
 			
-			if(zone!=null)
+			if(zone != null)
 				cage = zone.getCage();	
 			
-			if( cage!=null && cage.isFull()){
+			if( cage != null && cage.isCageFull()){
 				cage = zone.addCage();
 			}
 			
-			if(cage!=null)
+			if(cage != null)
 				cage.addAnimal(animal);
 			
 			return true;
 		}
 		
-		return false;
-		
 				
 	}
-	
+	/** Method to add a zone in the zoo according to its category
+	 * @param String
+	 * @return Zone*/
 	public Zone addZone(String type) {
 		Zone zone = null;
 		if(numberOfZonesCreated < noOfZones){
@@ -50,10 +67,14 @@ public class Zoo {
 		return zone;
 	}
 
+	/**Method to get a zone of a particular category 
+	 * Returns last zone added
+	 * @param String
+	 * @return Zone*/
+	
 	public Zone getZone(String type){
 		ArrayList<Zone> zones = zooChart.get(type);
 		Zone zone = null;
-		
 		if(zones.size() == 0){
 			zone = new Zone(type);
 			zones.add(zone);
@@ -64,12 +85,5 @@ public class Zoo {
 		return zone;	
 	}
 
-	public Zoo(String[] types){
-		
-		for(String s: types){
-			ArrayList<Zone> zones = new ArrayList<Zone>();
-			zooChart.put(s, zones);
-		}
-			
-	}
+	
 }

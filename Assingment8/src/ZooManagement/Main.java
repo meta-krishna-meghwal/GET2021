@@ -6,5 +6,6 @@ public class Main {
 	public static void main(){		
 		Zoo zoo = new Zoo(types);
 		
+		
 	}
 }
