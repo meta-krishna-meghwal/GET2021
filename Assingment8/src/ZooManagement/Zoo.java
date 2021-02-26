@@ -2,10 +2,13 @@ package ZooManagement;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Zoo {
 	
-	HashMap<String, ArrayList<Zone>> zooChart;
+	Map<String, List<Zone>> zooChart = new HashMap<String, List<Zone>>();
+	Map<Integer, List<Integer>> animalIds = new HashMap<Integer, List<Integer>>();
 	
 	static final int noOfZones = 15;
 	static  int numberOfZonesCreated = 0;
@@ -15,8 +18,8 @@ public class Zoo {
 	 * @param String[]  */
 	public Zoo(String[] types){
 		for(String s: types){
-			ArrayList<Zone> zones = new ArrayList<Zone>();
-			zooChart.put(s, zones);
+			List<Zone> zones = new ArrayList<Zone>();
+			this.zooChart.put(s, zones);
 		}
 			
 	}
@@ -46,8 +49,16 @@ public class Zoo {
 				cage = zone.addCage();
 			}
 			
-			if(cage != null)
+			if(cage != null){
 				cage.addAnimal(animal);
+				List<Integer> location = new ArrayList<Integer>();
+				location.add(zone.zoneId);
+				location.add(cage.cageId);
+				
+				animalIds.put(animal.animalId,location);
+				System.out.println(location.toString());
+				
+			}
 			
 			return true;
 		}
@@ -73,9 +84,9 @@ public class Zoo {
 	 * @return Zone*/
 	
 	public Zone getZone(String type){
-		ArrayList<Zone> zones = zooChart.get(type);
+		List<Zone> zones = zooChart.get(type);
 		Zone zone = null;
-		if(zones.size() == 0){
+		if(zones.size()==0){
 			zone = new Zone(type);
 			zones.add(zone);
 		}else{

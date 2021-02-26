@@ -1,12 +1,10 @@
 package ZooManagement;
 
-public class Main {
-	static String[] types = {"Bird","Reptile","Mammal"};
-	
-	public static void main(String[] args){		
+public class Main {	
+	public static void main(String[] args){	
+		String[] types = {"Bird","Reptile","Mammal"};
 		Zoo zoo = new Zoo(types);
-		
-		Animal animal = new Lion("King","mammals",12,10);
+		Animal animal = new Lion("King","Mammal",12,10);
 		System.out.println(zoo.addAnimal(animal));
 		
 	}

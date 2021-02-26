@@ -3,7 +3,7 @@ package ZooManagement;
 public abstract class Animal {
 	String animalName;
 	String animalType;
-	String animalId;
+	int animalId;
 	int animalHeight;
 	int animalWeight;
 	
@@ -12,6 +12,7 @@ public abstract class Animal {
 		animalHeight = height;
 		animalWeight = weight;
 		animalType = type;
+		animalId= (int) (Math.random()* 1000);
 	}
 	
 	
